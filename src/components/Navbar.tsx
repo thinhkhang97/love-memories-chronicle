@@ -1,12 +1,15 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import ProfileDropdown from "@/components/ProfileDropdown";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user, signIn } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,10 +48,26 @@ const Navbar = () => {
           >
             <Link to="/anniversary">Our Anniversary</Link>
           </Button>
+          
+          {user ? (
+            <ProfileDropdown />
+          ) : (
+            <Button onClick={signIn} variant="ghost" className="flex items-center gap-2">
+              <LogIn size={16} />
+              <span>Sign In</span>
+            </Button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-2">
+          {user ? (
+            <ProfileDropdown />
+          ) : (
+            <Button onClick={signIn} variant="ghost" size="icon" className="text-love-700">
+              <LogIn size={20} />
+            </Button>
+          )}
           <Button 
             variant="ghost" 
             size="icon" 
