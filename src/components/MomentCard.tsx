@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Calendar, Eye } from "lucide-react";
+import { Heart, Calendar, Eye, Image } from "lucide-react";
 
 export interface Moment {
   id: string;
@@ -94,12 +93,15 @@ const MomentCard = ({ moment, isDetailView = false }: MomentCardProps) => {
       {!isDetailView && (
         <CardFooter className="pt-0 flex justify-between items-center">
           <Button
+            asChild
             variant="ghost"
             size="sm"
             className="text-love-600 hover:text-love-700 hover:bg-love-100 p-0 h-auto"
           >
-            <Heart size={18} className="mr-1" />
-            <span>Memory</span>
+            <Link to={`/story-view/${moment.id}`}>
+              <Image size={18} className="mr-1" />
+              <span>Story</span>
+            </Link>
           </Button>
           
           <Button asChild size="sm" className="bg-love-500 hover:bg-love-600 btn-hover">

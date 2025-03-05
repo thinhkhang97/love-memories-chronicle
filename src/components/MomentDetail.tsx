@@ -1,10 +1,10 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Heart, ArrowLeft, Edit, Share2 } from "lucide-react";
+import { Calendar, Heart, ArrowLeft, Edit, Share2, Image } from "lucide-react";
 import MomentCard, { Moment } from "./MomentCard";
 
 interface MomentDetailProps {
@@ -41,9 +41,12 @@ const MomentDetail = ({ moment, onEdit }: MomentDetailProps) => {
           <Button 
             variant="outline" 
             className="border-love-200 text-love-600 hover:bg-love-50"
+            asChild
           >
-            <Share2 size={16} className="mr-2" />
-            Share
+            <Link to={`/story-view/${moment.id}`}>
+              <Image size={16} className="mr-2" />
+              Story View
+            </Link>
           </Button>
           
           {onEdit && (
